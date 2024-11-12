@@ -1,46 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import MemberCard from "./MemberCard";
 
-const members = [
-  {
-    id: 1,
-    name: "John Doe",
-    role: "President",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    role: "Vice President",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 3,
-    name: "Alice",
-    role: "Secretary",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 4,
-    name: "Bob",
-    role: "Treasurer",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 5,
-    name: "Charlie",
-    role: "Member",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 6,
-    name: "David",
-    role: "Member",
-    image: "https://via.placeholder.com/150",
-  },
-];
-
 const ClubMembers = () => {
+  const { name } = useParams(); // Get the 'name' parameter from the URL
+  const [club, setClub] = useState(null); // State to store club data
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
+  useEffect(() => {
+    const fetchClubData = async () => {
+      try {
+        const response = await fetch(`https://manthan-backend-7qm5.onrender.com/get-club/${name}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch club details.");
+        }
+        const data = await response.json();
+        setClub(data.club); // Set club data
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClubData();
+  }, [name]);
+
+  if (loading) return <p>Loading members...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
   return (
     <>
       <div className="w-full h-screen overflow-hidden bg-[#111] text-white">
@@ -54,12 +43,17 @@ const ClubMembers = () => {
             TEAM
           </h1>
         </div>
-        <p className="text-gray-700">This is the members page of the club.</p>
+        <p className="text-gray-700 text-center mt-4">This is the members page of the club.</p>
       </div>
+
       <div className="w-full h-fit bg-slate-700 flex gap-10 py-5 px-10 flex-wrap justify-evenly">
-        {members.map((member) => (
-          <MemberCard key={member.id} member={member} />
-        ))}
+        {club && club.members && club.members.length > 0 ? (
+          club.members.map((member) => (
+            <MemberCard key={member._id} member={member} /> // Assuming '_id' is the unique identifier for each member
+          ))
+        ) : (
+          <p>No members found.</p>
+        )}
       </div>
     </>
   );

@@ -10,11 +10,13 @@ const AddClub = () => {
     name: "",
     club_message: "",
     club_poster: "",
+    club_logo: "",
     pi_name: "",
     pi_message: "",
-    about: "",
-    gallery: [],
-    members: [{ name: "", role: "" }],
+    pi_image: "", // Add PI image URL
+    about: "", // Add about text
+    gallery: [], // Add gallery URLs
+    members: [{ name: "", role: "", image_url: "" }], // Add image_url for each member
     events: [
       {
         event_name: "",
@@ -61,7 +63,7 @@ const AddClub = () => {
   const handleAddMember = () => {
     setFormData((prevData) => ({
       ...prevData,
-      members: [...prevData.members, { name: "", role: "" }],
+      members: [...prevData.members, { name: "", role: "", image_url: "" }],
     }));
   };
 
@@ -101,11 +103,13 @@ const AddClub = () => {
           name: "",
           club_message: "",
           club_poster: "",
+          club_logo: "",
           pi_name: "",
           pi_message: "",
+          pi_image: "",
           about: "",
           gallery: [],
-          members: [{ name: "", role: "" }],
+          members: [{ name: "", role: "", image_url: "" }],
           events: [
             {
               event_name: "",
@@ -146,6 +150,7 @@ const AddClub = () => {
       <div className="bg-gray-800 w-11/12 max-w-3xl rounded-lg p-5 z-50 shadow-lg shadow-gray-700 m-5">
         <h1 className="text-white text-center text-3xl mb-4">Add Club</h1>
         <form onSubmit={handleSubmit}>
+          {/* Club Name */}
           <div className="flex flex-col p-4">
             <label htmlFor="name" className="text-white mb-2">
               Club Name
@@ -158,6 +163,8 @@ const AddClub = () => {
               className="p-2 rounded-md bg-gray-900 text-white"
             />
           </div>
+
+          {/* Club Message */}
           <div className="flex flex-col p-4">
             <label htmlFor="club_message" className="text-white mb-2">
               Club Message
@@ -170,6 +177,8 @@ const AddClub = () => {
               className="p-2 rounded-md bg-gray-900 text-white"
             />
           </div>
+
+          {/* Club Poster URL */}
           <div className="flex flex-col p-4">
             <label htmlFor="club_poster" className="text-white mb-2">
               Club Poster URL
@@ -178,6 +187,20 @@ const AddClub = () => {
               type="text"
               name="club_poster"
               value={formData.club_poster}
+              onChange={handleInputChange}
+              className="p-2 rounded-md bg-gray-900 text-white"
+            />
+          </div>
+
+          {/* Club Logo */}
+          <div className="flex flex-col p-4">
+            <label htmlFor="club_logo" className="text-white mb-2">
+              Club Logo URL
+            </label>
+            <input
+              type="text"
+              name="club_logo"
+              value={formData.club_logo}
               onChange={handleInputChange}
               className="p-2 rounded-md bg-gray-900 text-white"
             />
@@ -196,6 +219,7 @@ const AddClub = () => {
               className="p-2 rounded-md bg-gray-900 text-white"
             />
           </div>
+
           <div className="flex flex-col p-4">
             <label htmlFor="pi_message" className="text-white mb-2">
               PI Message
@@ -209,40 +233,78 @@ const AddClub = () => {
             />
           </div>
 
-          {/* Social Links */}
+          {/* PI Image */}
           <div className="flex flex-col p-4">
-            <label className="text-white mb-2">Social Links</label>
-            {["facebook", "twitter", "instagram"].map((platform) => (
-              <input
-                key={platform}
-                type="text"
-                name={`social_links.${platform}`} // Updated name attribute
-                placeholder={`${platform} URL`}
-                value={formData.social_links[platform]}
-                onChange={handleInputChange}
-                className="p-2 rounded-md bg-gray-900 text-white mb-2"
-              />
-            ))}
+            <label htmlFor="pi_image" className="text-white mb-2">
+              PI Image URL
+            </label>
+            <input
+              type="text"
+              name="pi_image"
+              value={formData.pi_image}
+              onChange={handleInputChange}
+              className="p-2 rounded-md bg-gray-900 text-white"
+            />
           </div>
 
-          {/* Members Section */}
+          {/* About Section */}
           <div className="flex flex-col p-4">
-            <label className="text-white mb-2">Members</label>
+            <label htmlFor="about" className="text-white mb-2">
+              About the Club
+            </label>
+            <textarea
+              name="about"
+              value={formData.about}
+              onChange={handleInputChange}
+              className="p-2 rounded-md bg-gray-900 text-white"
+            />
+          </div>
+
+          {/* Gallery Section */}
+          <div className="flex flex-col p-4">
+            <label htmlFor="gallery" className="text-white mb-2">
+              Gallery Images (URLs)
+            </label>
+            <textarea
+              name="gallery"
+              value={formData.gallery.join("\n")}
+              onChange={(e) => {
+                const galleryUrls = e.target.value.split("\n");
+                setFormData((prevData) => ({
+                  ...prevData,
+                  gallery: galleryUrls,
+                }));
+              }}
+              className="p-2 rounded-md bg-gray-900 text-white"
+            />
+          </div>
+
+          {/* Members */}
+          <div>
+            <h2 className="text-white">Members</h2>
             {formData.members.map((member, index) => (
-              <div key={index} className="flex flex-row space-x-2 mb-2">
+              <div key={index} className="flex flex-col p-4">
+                <label className="text-white">Member {index + 1} Name</label>
                 <input
                   type="text"
                   name={`members.${index}.name`}
-                  placeholder="Name"
                   value={member.name}
                   onChange={handleInputChange}
                   className="p-2 rounded-md bg-gray-900 text-white"
                 />
+                <label className="text-white">Member {index + 1} Role</label>
                 <input
                   type="text"
                   name={`members.${index}.role`}
-                  placeholder="Role"
                   value={member.role}
+                  onChange={handleInputChange}
+                  className="p-2 rounded-md bg-gray-900 text-white"
+                />
+                <label className="text-white">Member {index + 1} Image URL</label>
+                <input
+                  type="text"
+                  name={`members.${index}.image_url`}
+                  value={member.image_url}
                   onChange={handleInputChange}
                   className="p-2 rounded-md bg-gray-900 text-white"
                 />
@@ -251,50 +313,105 @@ const AddClub = () => {
             <button
               type="button"
               onClick={handleAddMember}
-              className="bg-blue-600 text-white p-2 rounded-md mt-2"
+              className="p-2 bg-blue-500 text-white rounded-md"
             >
               Add Member
             </button>
           </div>
 
-          {/* Events Section */}
-          <div className="flex flex-col p-4">
-            <label className="text-white mb-2">Events</label>
+          {/* Events */}
+          <div>
+            <h2 className="text-white">Events</h2>
             {formData.events.map((event, index) => (
-              <div key={index} className="flex flex-col mb-4">
+              <div key={index} className="flex flex-col p-4">
+                <label className="text-white">Event Name</label>
                 <input
                   type="text"
                   name={`events.${index}.event_name`}
-                  placeholder="Event Name"
                   value={event.event_name}
                   onChange={handleInputChange}
-                  className="p-2 rounded-md bg-gray-900 text-white mb-2"
+                  className="p-2 rounded-md bg-gray-900 text-white"
                 />
+                <label className="text-white">Event Date</label>
                 <input
                   type="date"
                   name={`events.${index}.event_date`}
-                  placeholder="Event Date"
                   value={event.event_date}
                   onChange={handleInputChange}
-                  className="p-2 rounded-md bg-gray-900 text-white mb-2"
+                  className="p-2 rounded-md bg-gray-900 text-white"
                 />
+                <label className="text-white">Event Details</label>
                 <input
                   type="text"
                   name={`events.${index}.event_details`}
-                  placeholder="Event Details"
                   value={event.event_details}
                   onChange={handleInputChange}
-                  className="p-2 rounded-md bg-gray-900 text-white mb-2"
+                  className="p-2 rounded-md bg-gray-900 text-white"
+                />
+                <label className="text-white">Event Poster URL</label>
+                <input
+                  type="text"
+                  name={`events.${index}.event_poster`}
+                  value={event.event_poster}
+                  onChange={handleInputChange}
+                  className="p-2 rounded-md bg-gray-900 text-white"
+                />
+                <label className="text-white">Event Description</label>
+                <textarea
+                  name={`events.${index}.event_detailedDescription`}
+                  value={event.event_detailedDescription}
+                  onChange={handleInputChange}
+                  className="p-2 rounded-md bg-gray-900 text-white"
                 />
               </div>
             ))}
-          </div>
-
-          <div className="flex justify-center p-4">
-            <button className="bg-blue-600 text-white p-2 rounded-md w-full transition-all shadow-md">
-              Submit
+            <button
+              type="button"
+              onClick={handleAddEvent}
+              className="p-2 bg-blue-500 text-white rounded-md"
+            >
+              Add Event
             </button>
           </div>
+
+          {/* Social Links */}
+          <div>
+            <h2 className="text-white">Social Links</h2>
+            <div className="flex flex-col">
+              <label className="text-white">Facebook URL</label>
+              <input
+                type="text"
+                name="social_links.facebook"
+                value={formData.social_links.facebook}
+                onChange={handleInputChange}
+                className="p-2 rounded-md bg-gray-900 text-white"
+              />
+              <label className="text-white">Twitter URL</label>
+              <input
+                type="text"
+                name="social_links.twitter"
+                value={formData.social_links.twitter}
+                onChange={handleInputChange}
+                className="p-2 rounded-md bg-gray-900 text-white"
+              />
+              <label className="text-white">Instagram URL</label>
+              <input
+                type="text"
+                name="social_links.instagram"
+                value={formData.social_links.instagram}
+                onChange={handleInputChange}
+                className="p-2 rounded-md bg-gray-900 text-white"
+              />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full p-2 bg-green-500 text-white rounded-md mt-4"
+          >
+            Add Club
+          </button>
         </form>
       </div>
     </div>

@@ -136,7 +136,7 @@ const Homepage = () => {
                 id: club._id,
                 name: club.name,
                 description: club.club_message,
-                poster: "https://via.placeholder.com/300", // Update with club poster URL
+                poster: club.club_poster, // Update with club poster URL
               }}
             />
           ))}

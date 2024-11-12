@@ -1,15 +1,16 @@
-"use client";
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Footer = () => {
+  const { name } = useParams(); // Get dynamic club name from the URL
+
   return (
     <>
       <div className="mx-auto flex-col md:flex md:flex-row bg-[#111] bg-gradient-to-t text-white max-w-screen px-6 py-1 md:py-2 md:justify-between h-fit">
-        <div className="flex my-2  items-center justify-center flex-col">
+        <div className="flex my-2 items-center justify-center flex-col">
           <img src="" alt="Logo" width={120} height={120} />
           <h1 className="font-bold font-colona">FOLLOW US</h1>
           <div className="flex flex-row justify-center space-x-4 mt-2">
@@ -27,19 +28,22 @@ const Footer = () => {
         <div className="flex flex-col text-white py-4">
           <h1 className="font-bold text-center font-colona">USEFUL LINKS</h1>
           <div className="flex text-center md:text-start text-sm flex-col gap-2 mt-2">
-            <a href="http://localhost:5173/clubs/2" target="blank">
+            {/* Use dynamic club name in links */}
+            <Link to={`/clubs/${name}`} target="blank">
               HOME
-            </a>
-            <a href="http://localhost:5173/clubs/2/about" target="blank">
+            </Link>
+            <Link to={`/clubs/${name}/about`} target="blank">
               ABOUT
-            </a>
-            <a href="http://localhost:5173/clubs/2/events" target="blank">
+            </Link>
+            <Link to={`/clubs/${name}/events`} target="blank">
               EVENTS
-            </a>
-            <a href="http://localhost:5173/clubs/2/members" target="blank">
+            </Link>
+            <Link to={`/clubs/${name}/members`} target="blank">
               MEMBERS
-            </a>
-            <a href="http://localhost:5173/clubs/2/gallery">Gallery</a>
+            </Link>
+            <Link to={`/clubs/${name}/gallery`} target="blank">
+              Gallery
+            </Link>
           </div>
         </div>
         <div className="flex flex-col text-white py-4 items-center text-center">
@@ -60,7 +64,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-[#111] text-white text-center text-base mb-1"> &copy; Expresso NIT Patna 2024</div>
+      <div className="w-full bg-[#111] text-white text-center text-base mb-1">
+        &copy; Expresso NIT Patna 2024
+      </div>
     </>
   );
 };

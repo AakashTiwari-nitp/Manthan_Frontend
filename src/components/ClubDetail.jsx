@@ -10,20 +10,21 @@ import Footer from "./Footer";
 import Gallery from "./Gallery";
 
 const ClubDetail = () => {
-  const { id } = useParams();
+  const { name } = useParams(); // Retrieve the club name from the URL params
 
   return (
     <div>
       <Navbar />
+      {/* Main Routes */}
       <Routes>
         <Route path="/" element={<ClubHome />} />
-        <Route path="/clubs/:name/about" element={<ClubAbout />} />
+        <Route path="about" element={<ClubAbout />} />
         <Route path="events" element={<ClubEvents />} />
         <Route path="members" element={<ClubMembers />} />
         <Route path="join" element={<ClubJoin />} />
         <Route path="gallery" element={<Gallery />} />
       </Routes>
-      <Footer />  
+      <Footer />
     </div>
   );
 };

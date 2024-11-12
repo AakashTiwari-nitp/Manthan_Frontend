@@ -37,7 +37,7 @@ const ClubAbout = () => {
 
   if (error) {
     return (
-      <div className="p-6 w-full h-fit bg-[#111] text-white">
+      <div className="p-6 w-full h-fit min-h-screen bg-[#111] text-white">
         <h1 className="text-3xl font-bold mb-4 text-yellow-100">About the Club</h1>
         <p className="text-white py-3 px-5">Error: {error}</p>
       </div>
@@ -45,18 +45,17 @@ const ClubAbout = () => {
   }
 
   return (
-    <div className="p-6 w-full h-fit bg-[#666] text-white z-50">
+    <div className="p-6 w-full h-fit min-h-screen bg-[#666] text-white z-50">
       <h1 className="text-3xl font-bold mb-4 text-yellow-100">About the Club</h1>
       <div className="text-white py-3 px-5 z-5">
         {/* Display each element in the 'about' array */}
-        {/* {club?.about && club.about.length > 0 ? (
+        {club?.about && club.about.length > 0 ? (
           club.about.map((item, index) => (
             <p key={index} className="py-2">{item}</p>
           ))
         ) : (
           <p>No description available.</p>
-        )} */}
-        hiiojgjdovkde gii
+        )}
       </div>
     </div>
   );

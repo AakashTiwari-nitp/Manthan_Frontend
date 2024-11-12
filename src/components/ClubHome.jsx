@@ -77,7 +77,7 @@ const ClubHome = () => {
         <div className="hero-section h-fit flex gap-2">
           <div className="w-1/2 h-full rounded-lg">
             <h1 className="text-3xl lg:text-5xl md:leading-normal xl:leading-loose p-5 font-['Gilroy']">
-              In a dance between literature and art, lives become canvas where words and brush strokes create beauty that whispers still.
+              {club?.club_message}
             </h1>
           </div>
           <div className="w-1/2 h-96 border-2 rounded-lg">
@@ -102,7 +102,14 @@ const ClubHome = () => {
 
           <div className="flex flex-row justify-center items-center relative lg:mt-[-9.5%] lg:ml-[70%] lg:z-10">
             <span>
-              <img src="https://via.placeholder.com/150" width={200} height={180} alt="Professor Image" />
+              {/* Set the PI image dynamically from club.pi_image */}
+              <img 
+                src={club?.pi_image || "https://via.placeholder.com/200"} 
+                width={200} 
+                height={180} 
+                alt="Professor In-Charge" 
+                className="rounded-full" // Add styling if needed
+              />
             </span>
             <span className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-16 sm:mr-48 md:mr-64 lg:mr-6">
               <a
