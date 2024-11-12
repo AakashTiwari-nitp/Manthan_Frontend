@@ -2,6 +2,10 @@ import React from "react";
 
 
 const MemberCard = ({ member }) => {
+
+  console.log("Member Image URL:", member.image);
+  console.log("Member Name:", member.name);
+
   return (
     <div className="border-2 border-black rounded-lg p-4 shadow-lg h-fit w-64 text-center hover:shadow-zinc-800 hover:shadow-xl hover:scale-105">
       <img

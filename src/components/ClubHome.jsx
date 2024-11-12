@@ -27,7 +27,9 @@ const ClubHome = () => {
   useEffect(() => {
     const fetchClubData = async () => {
       try {
-        const response = await fetch(`https://manthan-backend-7qm5.onrender.com/get-club/${name}`);
+        const response = await fetch(
+          `https://manthan-backend-7qm5.onrender.com/get-club/${name}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch club details.");
         }
@@ -62,14 +64,17 @@ const ClubHome = () => {
   if (loading) return <p>Loading club details...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
-  const fullTextWithLineBreaks = club?.pi_message?.split("\n").map((line, index) => (
-    <React.Fragment key={index}>
-      {line.trim()}
-      <br />
-    </React.Fragment>
-  ));
+  const fullTextWithLineBreaks = club?.pi_message
+    ?.split("\n")
+    .map((line, index) => (
+      <React.Fragment key={index}>
+        {line.trim()}
+        <br />
+      </React.Fragment>
+    ));
 
-  const shortText = club?.pi_message?.split(" ").slice(0, 120).join(" ") + "...";
+  const shortText =
+    club?.pi_message?.split(" ").slice(0, 120).join(" ") + "...";
 
   return (
     <>
@@ -81,7 +86,11 @@ const ClubHome = () => {
             </h1>
           </div>
           <div className="w-1/2 h-96 border-2 rounded-lg">
-            <img src={club?.club_poster || "https://via.placeholder.com/150"} alt={club?.name} className="w-full h-full cover" />
+            <img
+              src={club?.club_poster || "https://via.placeholder.com/150"}
+              alt={club?.name}
+              className="w-full h-full cover"
+            />
           </div>
         </div>
         <div className="bg-black p-0 m-0 min-h-[400px] flex flex-col gap-y-4 justify-center w-full mt-10 rounded-lg">
@@ -96,19 +105,19 @@ const ClubHome = () => {
               PROFESSOR INCHARGE
             </div>
             <div className="font-antonio text-md text-gray-200 md:text-[30px] md:pt-4 ">
-              {club?.name}
+              {club?.pi_name}
             </div>
           </div>
 
           <div className="flex flex-row justify-center items-center relative lg:mt-[-9.5%] lg:ml-[70%] lg:z-10">
             <span>
               {/* Set the PI image dynamically from club.pi_image */}
-              <img 
-                src={club?.pi_image || "https://via.placeholder.com/200"} 
-                width={200} 
-                height={180} 
-                alt="Professor In-Charge" 
-                className="rounded-full" // Add styling if needed
+              <img
+                src={club?.pi_image || "https://via.placeholder.com/150"} // Use fallback image if pi_image is null or undefined
+                width={200}
+                height={180}
+                alt="Professor In-Charge"
+                className="rounded-full object-cover" // object-cover to maintain aspect ratio
               />
             </span>
             <span className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-16 sm:mr-48 md:mr-64 lg:mr-6">
@@ -124,7 +133,9 @@ const ClubHome = () => {
 
           <div className="md:w-[66%] text-sm text-white m-4 p-4 overflow-auto lg:mx-36 lg:text-lg lg:backdrop-filter lg:backdrop-blur-md lg:mt-[-15%] lg:z-8 lg:pt-32 lg:rounded-md">
             <p>
-              {isMobile && !showFullDescription ? shortText : fullTextWithLineBreaks}
+              {isMobile && !showFullDescription
+                ? shortText
+                : fullTextWithLineBreaks}
             </p>
           </div>
         </div>
