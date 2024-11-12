@@ -24,7 +24,7 @@ const Homepage = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/get-clubs"); // Update with your backend URL
+        const response = await fetch("https://manthan-backend-7qm5.onrender.com/get-clubs"); // Update with your backend URL
         if (!response.ok) {
           throw new Error("Failed to fetch clubs.");
         }

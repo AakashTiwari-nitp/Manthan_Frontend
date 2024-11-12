@@ -85,7 +85,7 @@ const AddClub = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/add-club", {
+      const response = await fetch("https://manthan-backend-7qm5.onrender.com/add-club", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

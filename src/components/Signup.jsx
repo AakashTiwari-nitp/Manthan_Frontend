@@ -34,7 +34,7 @@ const Signup = () => {
 
     try {
       // Send data to backend API using fetch
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("https://manthan-backend-7qm5.onrender.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
