@@ -45,7 +45,7 @@ const ClubAbout = () => {
   }
 
   return (
-    <div className="p-6 w-full h-fit min-h-screen bg-[#666] text-white z-50">
+    <div className="p-6 w-full h-fit min-h-[60vh] bg-[#111] text-white z-50">
       <h1 className="text-3xl font-bold mb-4 text-yellow-100">About the Club</h1>
       <div className="text-white py-3 px-5 z-5">
         {/* Display each element in the 'about' array */}

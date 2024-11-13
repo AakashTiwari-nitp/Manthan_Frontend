@@ -93,52 +93,56 @@ const ClubHome = () => {
             />
           </div>
         </div>
-        <div className="bg-black p-0 m-0 min-h-[400px] flex flex-col gap-y-4 justify-center w-full mt-10 rounded-lg">
-          <div className="flex flex-col items-center lg:justify-start lg:items-start lg:ml-40 lg:z-10 gap-4 py-4">
-            <div className="text-white">
-              <span className="font-antonio text-xl md:text-[46px]">
-                MESSAGE FROM OUR
+
+        {/* Conditionally render the PI message section */}
+        {club?.pi_name && (
+          <div className="bg-black p-0 m-0 min-h-[400px] flex flex-col gap-y-4 justify-center w-full mt-10 rounded-lg">
+            <div className="flex flex-col items-center lg:justify-start lg:items-start lg:ml-40 lg:z-10 gap-4 py-4">
+              <div className="text-white">
+                <span className="font-antonio text-xl md:text-[46px]">
+                  MESSAGE FROM OUR
+                </span>
+              </div>
+
+              <div className="text-[#FEB952] text-xl md:text-[46px] md:mt-[-10px]">
+                PROFESSOR INCHARGE
+              </div>
+              <div className="font-antonio text-md text-gray-200 md:text-[30px] md:pt-4 ">
+                {club?.pi_name}
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center items-center relative lg:mt-[-9.5%] lg:ml-[70%] lg:z-10">
+              <span>
+                {/* Set the PI image dynamically from club.pi_image */}
+                <img
+                  src={club?.pi_image || "https://via.placeholder.com/150"} // Use fallback image if pi_image is null or undefined
+                  width={200}
+                  height={180}
+                  alt="Professor In-Charge"
+                  className="rounded-full object-cover" // object-cover to maintain aspect ratio
+                />
+              </span>
+              <span className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-16 sm:mr-48 md:mr-64 lg:mr-6">
+                <a
+                  href={club?.social_links?.linkedin || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaLinkedin className="text-white w-6 h-6" />
+                </a>
               </span>
             </div>
 
-            <div className="text-[#FEB952] text-xl md:text-[46px] md:mt-[-10px]">
-              PROFESSOR INCHARGE
+            <div className="md:w-[66%] text-sm text-white m-4 p-4 overflow-auto lg:mx-36 lg:text-lg lg:backdrop-filter lg:backdrop-blur-md lg:mt-[-15%] lg:z-8 lg:pt-32 lg:rounded-md">
+              <p>
+                {isMobile && !showFullDescription
+                  ? shortText
+                  : fullTextWithLineBreaks}
+              </p>
             </div>
-            <div className="font-antonio text-md text-gray-200 md:text-[30px] md:pt-4 ">
-              {club?.pi_name}
-            </div>
           </div>
-
-          <div className="flex flex-row justify-center items-center relative lg:mt-[-9.5%] lg:ml-[70%] lg:z-10">
-            <span>
-              {/* Set the PI image dynamically from club.pi_image */}
-              <img
-                src={club?.pi_image || "https://via.placeholder.com/150"} // Use fallback image if pi_image is null or undefined
-                width={200}
-                height={180}
-                alt="Professor In-Charge"
-                className="rounded-full object-cover" // object-cover to maintain aspect ratio
-              />
-            </span>
-            <span className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-16 sm:mr-48 md:mr-64 lg:mr-6">
-              <a
-                href={club?.social_links?.linkedin || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin className="text-white w-6 h-6" />
-              </a>
-            </span>
-          </div>
-
-          <div className="md:w-[66%] text-sm text-white m-4 p-4 overflow-auto lg:mx-36 lg:text-lg lg:backdrop-filter lg:backdrop-blur-md lg:mt-[-15%] lg:z-8 lg:pt-32 lg:rounded-md">
-            <p>
-              {isMobile && !showFullDescription
-                ? shortText
-                : fullTextWithLineBreaks}
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </>
   );

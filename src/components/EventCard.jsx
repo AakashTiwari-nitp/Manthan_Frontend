@@ -5,7 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 const EventCard = ({ event }) => {
 
   return (
-    <div className="w-96 sm:w-80 md:w-80 h-fit lg:w-96 lg:h-fit border rounded-lg p-4 shadow-lg text-center bg-white">
+    <div className="w-96 sm:w-80 md:w-80 h-fit lg:w-96 lg:h-fit border rounded-lg p-4 shadow-lg text-center bg-[#333] hover:shadow-zinc-300 hover:shadow-xl hover:scale-105">
       {/* Event Poster */}
       <img
         src={event.event_poster} // Use the event's poster URL here
@@ -17,10 +17,10 @@ const EventCard = ({ event }) => {
       <h3 className="text-xl font-semibold mb-2">{event.event_name}</h3>
       
       {/* Event Description */}
-      <p className="text-gray-700 mb-2">{event.event_details}</p>
+      <p className="text-zinc-200 mb-2">{event.event_details}</p>
       
       {/* Event Date */}
-      <p className="text-gray-500 mb-2">{new Date(event.event_date).toLocaleDateString()}</p>
+      <p className="text-zinc-100 mb-2">{new Date(event.event_date).toLocaleDateString()}</p>
       
 
 
