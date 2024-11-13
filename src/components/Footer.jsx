@@ -74,19 +74,19 @@ const Footer = () => {
           <h1 className="font-bold text-center font-colona">USEFUL LINKS</h1>
           <div className="flex text-center md:text-start text-sm flex-col gap-2 mt-2">
             {/* Use dynamic club name in links */}
-            <Link to={`/clubs/${name}`} target="blank">
+            <Link to={`/clubs/${name}`} onClick={handleMenuClick}>
               HOME
             </Link>
-            <Link to={`/clubs/${name}/about`} target="blank">
+            <Link to={`/clubs/${name}/about`} onClick={handleMenuClick}>
               ABOUT
             </Link>
-            <Link to={`/clubs/${name}/events`} target="blank">
+            <Link to={`/clubs/${name}/events`} onClick={handleMenuClick}>
               EVENTS
             </Link>
-            <Link to={`/clubs/${name}/members`} target="blank">
+            <Link to={`/clubs/${name}/members`} onClick={handleMenuClick}>
               MEMBERS
             </Link>
-            <Link to={`/clubs/${name}/gallery`} target="blank">
+            <Link to={`/clubs/${name}/gallery`} onClick={handleMenuClick}>
               Gallery
             </Link>
           </div>
